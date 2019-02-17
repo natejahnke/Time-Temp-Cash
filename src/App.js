@@ -3,6 +3,7 @@ import './styles/styles.scss';
 // import Card from './components/Card';
 import HomeCard from './components/HomeCard';
 import HomeButton from './components/HomeButton';
+import LocationSearchInput from './components/LocationSearchInput';
 
 export default class App extends React.Component {
   state = {
@@ -25,8 +26,9 @@ export default class App extends React.Component {
   render() {
     return (
       <div>
-        <button onClick={this.getLocation}>Click Me</button>
-        {/* <HomeButton onClick={this.getLocation} /> */}
+        {/* <button onClick={this.getLocation}>Click Me</button> */}
+        <LocationSearchInput />
+        <HomeButton onClick={this.getLocation} />
         <HomeCard />
       </div>
     );
