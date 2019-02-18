@@ -5,43 +5,10 @@ import PlacesAutocomplete, {
 } from "react-places-autocomplete";
 
 class LocationSearchInput extends React.Component {
-  state = {
-    address: null,
-    city: null,
-    state: null,
-    country: null,
-    latitude: null,
-    longitude: null
-  };
-
-  splitAddress = address => {
-    let split = address.split(", ");
-
-    console.log(address.split(",").length - 1);
-
-    if (address.split(",").length - 1 === 2) {
-      const city = split[0];
-      const state = split[1];
-      const country = split[2];
-
-      this.setState({
-        address: address,
-        city: city,
-        state: state,
-        country: country
-      });
-    } else {
-      const city = split[0];
-      const country = split[1];
-
-      this.setState({
-        address: address,
-        city: city,
-        state: null,
-        country: country
-      });
-    }
-  };
+  constructor(props) {
+    super(props);
+    this.state = { address: "" };
+  }
 
   handleChange = address => {
     this.setState({ address });
@@ -49,14 +16,8 @@ class LocationSearchInput extends React.Component {
 
   handleSelect = address => {
     geocodeByAddress(address)
-      .then(this.splitAddress(address))
       .then(results => getLatLng(results[0]))
-      .then(({ lat, lng }) =>
-        this.setState({
-          latitude: lat,
-          longitude: lng
-        })
-      )
+      .then(({ lat, lng }) => console.log("Success", { lat, lng }))
       .catch(error => console.error("Error", error));
   };
 
