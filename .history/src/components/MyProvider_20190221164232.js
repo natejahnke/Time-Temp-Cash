@@ -20,8 +20,7 @@ export default class MyProvider extends React.Component {
         humidity: "",
         wind: "",
         icon: "",
-        summary: "",
-        fullSummary: ""
+        summary: ""
       }
     }
   };
@@ -90,21 +89,11 @@ export default class MyProvider extends React.Component {
         )
         .then(weatherResults => {
           console.log(weatherResults.data.timezone);
-          this.setState({
-            home: {
-              timezone: weatherResults.data.timezone
-            },
-            home: {
-              weather: {
-                temperature: weatherResults.data.currently.temperature,
-                humidity: weatherResults.data.currently.humidity,
-                wind: weatherResults.data.currently.windSpeed,
-                icon: weatherResults.data.currently.icon,
-                summary: weatherResults.data.currently.summary,
-                fullSummary: weatherResults.data.daily.summary
-              }
-            }
-          });
+          // this.setState({
+          //   home: {
+          //     timezone: weatherResults.data.timezone
+          //   }
+          // });
         });
     }
   };
@@ -117,7 +106,7 @@ export default class MyProvider extends React.Component {
           splitAddress: this.splitAddress,
           handleChange: this.handleChange,
           handleSelect: this.handleSelect,
-          onClick: this.onClickSetHome
+          onClick: this.onClick
         }}
       >
         {this.props.children}

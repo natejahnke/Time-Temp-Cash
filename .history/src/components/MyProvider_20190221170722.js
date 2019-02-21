@@ -90,6 +90,8 @@ export default class MyProvider extends React.Component {
         )
         .then(weatherResults => {
           console.log(weatherResults.data.timezone);
+          localStorage.setItem("home": {
+            "timeZone", weatherResults.data.timezone});
           this.setState({
             home: {
               timezone: weatherResults.data.timezone

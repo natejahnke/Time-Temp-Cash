@@ -13,16 +13,12 @@ export default class MyProvider extends React.Component {
     latitude: "",
     longitude: "",
     timezone: "",
-    home: {
-      timezone: "",
-      weather: {
-        temperature: "",
-        humidity: "",
-        wind: "",
-        icon: "",
-        summary: "",
-        fullSummary: ""
-      }
+    weather: {
+      temperature: "",
+      humidity: "",
+      wind: "",
+      icon: "",
+      summary: ""
     }
   };
 
@@ -72,7 +68,7 @@ export default class MyProvider extends React.Component {
       .catch(error => console.error("Error", error));
   };
 
-  onClickSetHome = () => {
+  onClick = () => {
     if (this.state.latitude & this.state.longitude) {
       console.log(
         "We have lats and longs " +
@@ -90,21 +86,7 @@ export default class MyProvider extends React.Component {
         )
         .then(weatherResults => {
           console.log(weatherResults.data.timezone);
-          this.setState({
-            home: {
-              timezone: weatherResults.data.timezone
-            },
-            home: {
-              weather: {
-                temperature: weatherResults.data.currently.temperature,
-                humidity: weatherResults.data.currently.humidity,
-                wind: weatherResults.data.currently.windSpeed,
-                icon: weatherResults.data.currently.icon,
-                summary: weatherResults.data.currently.summary,
-                fullSummary: weatherResults.data.daily.summary
-              }
-            }
-          });
+
         });
     }
   };
@@ -117,7 +99,7 @@ export default class MyProvider extends React.Component {
           splitAddress: this.splitAddress,
           handleChange: this.handleChange,
           handleSelect: this.handleSelect,
-          onClick: this.onClickSetHome
+          onClick: this.onClick
         }}
       >
         {this.props.children}

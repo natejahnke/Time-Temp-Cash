@@ -20,8 +20,7 @@ export default class MyProvider extends React.Component {
         humidity: "",
         wind: "",
         icon: "",
-        summary: "",
-        fullSummary: ""
+        summary: ""
       }
     }
   };
@@ -100,8 +99,7 @@ export default class MyProvider extends React.Component {
                 humidity: weatherResults.data.currently.humidity,
                 wind: weatherResults.data.currently.windSpeed,
                 icon: weatherResults.data.currently.icon,
-                summary: weatherResults.data.currently.summary,
-                fullSummary: weatherResults.data.daily.summary
+                summary: weatherResults.data.currently.summary
               }
             }
           });

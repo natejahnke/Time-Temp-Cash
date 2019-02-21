@@ -20,8 +20,7 @@ export default class MyProvider extends React.Component {
         humidity: "",
         wind: "",
         icon: "",
-        summary: "",
-        fullSummary: ""
+        summary: ""
       }
     }
   };
@@ -93,16 +92,6 @@ export default class MyProvider extends React.Component {
           this.setState({
             home: {
               timezone: weatherResults.data.timezone
-            },
-            home: {
-              weather: {
-                temperature: weatherResults.data.currently.temperature,
-                humidity: weatherResults.data.currently.humidity,
-                wind: weatherResults.data.currently.windSpeed,
-                icon: weatherResults.data.currently.icon,
-                summary: weatherResults.data.currently.summary,
-                fullSummary: weatherResults.data.daily.summary
-              }
             }
           });
         });
