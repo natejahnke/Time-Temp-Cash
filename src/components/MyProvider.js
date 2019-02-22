@@ -1,6 +1,7 @@
 import React from "react";
 import { geocodeByAddress, getLatLng } from "react-places-autocomplete";
 import axios from "axios";
+import cc from "currency-codes";
 
 export const MyContext = React.createContext();
 
@@ -25,6 +26,14 @@ export default class MyProvider extends React.Component {
       }
     }
   };
+
+  getCurrency = () => {
+    const fromCurrency = cc.country(this.state.country);
+    axios.get("https://forex.1forge.com/1.0.3/convert?from=" + fromCurrency[0].code + "&to=EUR&quantity=100&api_key=N8pYi4Mp9ApZzp0sUxl4wz0jISjbYbQ6")
+    .then(currencyResults => {
+      console.log(currencyResults.data.text);
+    })
+  }
 
   splitAddress = address => {
     let split = address.split(", ");
@@ -105,11 +114,13 @@ export default class MyProvider extends React.Component {
               }
             }
           });
-        });
+        }).then()
     }
   };
 
   render() {
+    console.log(cc.country('United States Of America (The)'));
+    // console.log(cc.countries());
     return (
       <MyContext.Provider
         value={{
