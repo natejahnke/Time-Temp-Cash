@@ -1,7 +1,7 @@
 import React from "react";
 import { geocodeByAddress, getLatLng } from "react-places-autocomplete";
 import axios from "axios";
-import countryCurrency from "../countryCurrency.json";
+import countryCurrency from "../../public/countryCurrency.json";
 
 export const MyContext = React.createContext();
 
@@ -27,16 +27,16 @@ export default class MyProvider extends React.Component {
     }
   };
 
-  getCurrency = country => {
-    const currencyCode = countryCurrency[country];
+  getCurrency = () => {
+    console.log(countryCurrency.USA);
     axios
       .get(
-        "https://api.exchangeratesapi.io/latest?base=USD&symbols=" +
-          currencyCode
+        "https://forex.1forge.com/1.0.3/convert?from=" +
+          fromCurrency[0].code +
+          "&to=EUR&quantity=100&api_key=N8pYi4Mp9ApZzp0sUxl4wz0jISjbYbQ6"
       )
       .then(currencyResults => {
-        let results = currencyResults.data;
-        console.log(results["rates"][currencyCode]);
+        console.log(currencyResults.data.text);
       });
   };
 
@@ -106,7 +106,9 @@ export default class MyProvider extends React.Component {
           console.log(weatherResults.data.timezone);
           this.setState({
             home: {
-              timezone: weatherResults.data.timezone,
+              timezone: weatherResults.data.timezone
+            },
+            home: {
               weather: {
                 temperature: weatherResults.data.currently.temperature,
                 humidity: weatherResults.data.currently.humidity,
@@ -118,7 +120,7 @@ export default class MyProvider extends React.Component {
             }
           });
         })
-        .then(this.getCurrency(this.state.country));
+        .then();
     }
   };
 

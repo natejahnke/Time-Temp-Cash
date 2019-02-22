@@ -29,14 +29,15 @@ export default class MyProvider extends React.Component {
 
   getCurrency = country => {
     const currencyCode = countryCurrency[country];
+    // console.log(countryCurrency[country]);
     axios
       .get(
-        "https://api.exchangeratesapi.io/latest?base=USD&symbols=" +
-          currencyCode
+        "https://forex.1forge.com/1.0.3/convert?from=" +
+          currencyCode +
+          "&to=EUR&quantity=100&api_key=N8pYi4Mp9ApZzp0sUxl4wz0jISjbYbQ6"
       )
       .then(currencyResults => {
-        let results = currencyResults.data;
-        console.log(results["rates"][currencyCode]);
+        console.log(currencyResults.data.text);
       });
   };
 
@@ -106,7 +107,9 @@ export default class MyProvider extends React.Component {
           console.log(weatherResults.data.timezone);
           this.setState({
             home: {
-              timezone: weatherResults.data.timezone,
+              timezone: weatherResults.data.timezone
+            },
+            home: {
               weather: {
                 temperature: weatherResults.data.currently.temperature,
                 humidity: weatherResults.data.currently.humidity,
@@ -118,7 +121,7 @@ export default class MyProvider extends React.Component {
             }
           });
         })
-        .then(this.getCurrency(this.state.country));
+        .then(this.getCurrency("Japan"));
     }
   };
 

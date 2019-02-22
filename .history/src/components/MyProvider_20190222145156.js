@@ -36,7 +36,7 @@ export default class MyProvider extends React.Component {
       )
       .then(currencyResults => {
         let results = currencyResults.data;
-        console.log(results["rates"][currencyCode]);
+        console.log(results[rates][currencyCode]);
       });
   };
 

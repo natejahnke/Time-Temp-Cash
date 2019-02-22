@@ -32,11 +32,10 @@ export default class MyProvider extends React.Component {
     axios
       .get(
         "https://api.exchangeratesapi.io/latest?base=USD&symbols=" +
-          currencyCode
+          countryCurrency
       )
       .then(currencyResults => {
-        let results = currencyResults.data;
-        console.log(results["rates"][currencyCode]);
+        console.log(currencyResults.data.text);
       });
   };
 
