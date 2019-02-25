@@ -1,34 +1,47 @@
-import React from 'react';
+import React from "react";
+import Clock from "react-live-clock";
+
+// const temperature = parseInt(props.homeTemp);
 
 const HomeCard = props => (
-  <div className='card'>
-    <h1 className='city'>Tokyo, Japan</h1>
-    <h3 className='time'>6:10 PM</h3>
-    <span className='date'>Fri 08 Feb</span>
+  <div className="card">
+    <h1 className="city">{props.homeCity}</h1>
+    <Clock
+      timezone={"US/Pacific"}
+      format={"h:mm:ssa, dddd, MMMM Mo "}
+      ticking={true}
+    />
+    <span className="date">Fri 08 Feb</span>
 
-    <div className='weather'>
-      <strong className='temperature'>
-        78<span>˚</span>
-        <span className='scale'>f</span>
+    <div className="weather">
+      <strong className="temperature">
+        {parseInt(props.homeTemperature)}
+        <span>˚</span>
+        <span className="scale">f</span>
       </strong>
-      <span className='weather-icon'>
-        <i className='fas fa-cloud-sun fa-lg' />
+      <span className="weather-icon">
+        <i className="fas fa-cloud-sun fa-lg" />
       </span>
-      <div className='weather-details'>
-        <span>Precip: 56%</span>
-        <span>Wind: 11 MPH</span>Humidity: 82%
+      <div className="weather-details">
+        <span>
+          Precip: {props.homePrecip.toString().replace(/^[0.]+/, "")}%
+        </span>
+        <span>Wind: {props.homeWind} MPH</span>
+        <span>
+          Humidity: {props.homeHumid.toString().replace(/^[0.]+/, "")}%
+        </span>
       </div>
     </div>
-    <div className='hi-low'>
+    <div className="hi-low">
       <span>
-        <i className='fas fa-long-arrow-alt-down' />
+        <i className="fas fa-long-arrow-alt-down" />
         72˚
-        <i className='fas fa-long-arrow-alt-up' />
+        <i className="fas fa-long-arrow-alt-up" />
         85˚
       </span>
-      <span className='weather-icon-desc'>Partly Cloudy</span>
+      <span className="weather-icon-desc">{props.homeDesc}</span>
     </div>
-    <div className='money'>$1 USD = ¥109.765 JPY</div>
+    <div className="money">$1 USD = ¥109.765 JPY</div>
   </div>
 );
 

@@ -1,24 +1,23 @@
-import React from "react";
-import { MyContext } from "./MyProvider";
+import React from 'react';
+import { MyContext } from './MyProvider';
 
-import PlacesAutocomplete from "react-places-autocomplete";
+import PlacesAutocomplete from 'react-places-autocomplete';
 
 class LocationSearchInput extends React.Component {
   render() {
     const searchOptions = {
-      types: ["(cities)"]
+      types: ['(cities)']
     };
 
     return (
-      <div>
+      <div className="layout">
         <MyContext.Consumer>
           {context => (
             <PlacesAutocomplete
               searchOptions={searchOptions}
               value={context.state.address}
               onChange={context.handleChange}
-              onSelect={context.handleSelect}
-            >
+              onSelect={context.handleSelect}>
               {({
                 getInputProps,
                 suggestions,
@@ -28,27 +27,26 @@ class LocationSearchInput extends React.Component {
                 <div>
                   <input
                     {...getInputProps({
-                      placeholder: "Search Places ...",
-                      className: "location-search-input"
+                      placeholder: 'Search Places ...',
+                      className: 'location-search-input'
                     })}
                   />
                   <div className="autocomplete-dropdown-container">
                     {loading && <div>Loading...</div>}
                     {suggestions.map(suggestion => {
                       const className = suggestion.active
-                        ? "suggestion-item--active"
-                        : "suggestion-item";
+                        ? 'suggestion-item--active'
+                        : 'suggestion-item';
                       // inline style for demonstration purpose
                       const style = suggestion.active
-                        ? { backgroundColor: "#fafafa", cursor: "pointer" }
-                        : { backgroundColor: "#ffffff", cursor: "pointer" };
+                        ? { backgroundColor: '#fafafa', cursor: 'pointer' }
+                        : { backgroundColor: '#ffffff', cursor: 'pointer' };
                       return (
                         <div
                           {...getSuggestionItemProps(suggestion, {
                             className,
                             style
-                          })}
-                        >
+                          })}>
                           <span>{suggestion.description}</span>
                         </div>
                       );

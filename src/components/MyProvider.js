@@ -3,6 +3,9 @@ import { geocodeByAddress, getLatLng } from "react-places-autocomplete";
 import axios from "axios";
 import countryCurrency from "../countryCurrency.json";
 
+import HomeCard from "./HomeCard";
+import LocationSearchInput from "./LocationSearchInput";
+import HomeButton from "./HomeButton";
 export const MyContext = React.createContext();
 
 export default class MyProvider extends React.Component {
@@ -15,10 +18,16 @@ export default class MyProvider extends React.Component {
     longitude: "",
     timezone: "",
     home: {
+      city: "",
+      state: "",
+      country: "",
+      latitude: "",
+      longitude: "",
       timezone: "",
       weather: {
-        temperature: "",
+        temperature: null,
         humidity: "",
+        precip: "",
         wind: "",
         icon: "",
         summary: "",
@@ -110,6 +119,7 @@ export default class MyProvider extends React.Component {
               weather: {
                 temperature: weatherResults.data.currently.temperature,
                 humidity: weatherResults.data.currently.humidity,
+                precip: weatherResults.data.daily.data[0].precipProbability,
                 wind: weatherResults.data.currently.windSpeed,
                 icon: weatherResults.data.currently.icon,
                 summary: weatherResults.data.currently.summary,
@@ -131,9 +141,21 @@ export default class MyProvider extends React.Component {
           handleChange: this.handleChange,
           handleSelect: this.handleSelect,
           onClick: this.onClickSetHome
-        }}
-      >
+        }}>
         {this.props.children}
+        <div className="input-layout">
+          <LocationSearchInput />
+          <HomeButton />
+        </div>
+        {this.state.home.timezone && (
+          <HomeCard
+            homeCity={this.state.city}
+            homeTemperature={this.state.home.weather.temperature}
+            homePrecip={this.state.home.weather.precip}
+            homeWind={this.state.home.weather.wind}
+            homeHumid={this.state.home.weather.humidity}
+          />
+        )}
       </MyContext.Provider>
     );
   }

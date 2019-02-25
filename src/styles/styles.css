@@ -11,6 +11,7 @@ html {
 body {
   width: 411px;
   margin: 0 auto;
+  height: 100%;
   background-color: #1a2930;
   font-family: 'Roboto Slab', serif;
   font-size: 1.8rem; }
@@ -20,6 +21,10 @@ button {
 
 button:disabled {
   cursor: default; }
+
+.input-layout {
+  display: flex;
+  justify-content: center; }
 
 /*! normalize.css v5.0.0 | MIT License | github.com/necolas/normalize.css */
 /**
@@ -505,27 +510,15 @@ template {
     font-weight: bold;
     margin-bottom: 10px; }
 
-.animate {
-  transition: all 0.1s;
-  -webkit-transition: all 0.1s; }
-
-.action-button {
-  position: relative;
-  padding: 10px 40px;
-  margin: 0px 10px 10px 0px;
-  float: left;
-  border-radius: 10px;
-  font-family: 'Pacifico', cursive;
-  font-size: 25px;
-  color: #fff;
-  text-decoration: none; }
-
-.action-button:active {
-  transform: translate(0px, 5px);
-  -webkit-transform: translate(0px, 5px);
-  border-bottom: 1px solid; }
-
-.blue {
-  background-color: #3498db;
-  border-bottom: 5px solid #2980b9;
-  text-shadow: 0px -2px #2980b9; }
+button {
+  background-color: #0066ff;
+  border: none;
+  padding: 0.4rem;
+  text-align: center;
+  margin-left: 0.8rem;
+  text-decoration: none;
+  border-radius: 16px;
+  outline: none;
+  max-height: 28px; }
+  button:hover {
+    background-color: #80b3ff; }
