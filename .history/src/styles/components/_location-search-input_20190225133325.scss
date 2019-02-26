@@ -1,4 +1,4 @@
-input {
+.location-search-input {
   display: block;
   background-color: #434857;
   border: 1px solid #434857;
@@ -9,14 +9,4 @@ input {
   //   font-size: 0.9rem;
   line-height: 1.5;
   width: 100%;
-
-  &:focus {
-    color: #434857;
-    background-color: #fff;
-  }
-}
-
-.autocomplete-dropdown-container {
-  max-width: 236px;
-  z-index: 2;
 }

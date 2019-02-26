@@ -8,15 +8,10 @@ input {
   background-clip: padding-box;
   //   font-size: 0.9rem;
   line-height: 1.5;
-  width: 100%;
+  max-width: 100%;
 
   &:focus {
     color: #434857;
     background-color: #fff;
   }
-}
-
-.autocomplete-dropdown-container {
-  max-width: 236px;
-  z-index: 2;
 }

@@ -1,15 +1,20 @@
 import React from "react";
 import Clock from "react-live-clock";
 
-// const temperature = parseInt(props.homeTemp);
+// const date = props.homeDate;
 
 const HomeCard = props => (
   <div className="card">
-    <h1 className="city">
-      {props.homeCity}, {props.homeState}, {props.homeCountry}
-    </h1>
-    <Clock timezone={"US/Pacific"} format={"h:mm:ssa"} ticking={true} />
-    <span className="date">Fri 08 Feb</span>
+    <h1 className="city">{props.homeCity}</h1>
+    <Clock
+      timezone={"US/Pacific"}
+      format={"h:mm:ssa"}
+      ticking={true}
+      className={"clock"}
+    />
+    <span className="date">
+      {/* {new Date().toLocaleString("en-US", { timeZone: date })} */}
+    </span>
 
     <div className="weather">
       <strong className="temperature">

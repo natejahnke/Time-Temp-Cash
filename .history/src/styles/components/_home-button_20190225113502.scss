@@ -1,0 +1,18 @@
+button {
+  background-color: transparent;
+  background-image: none;
+  color: #1997c6;
+  border-color: #1997c6;
+  padding: 0.4rem;
+  text-align: center;
+  margin-left: 0.8rem;
+  text-decoration: none;
+  border: 1px solid transparent;
+  border-radius: 0.25rem;
+  outline: none;
+  max-height: 28px;
+
+  &:hover {
+    background-color: #80b3ff;
+  }
+}

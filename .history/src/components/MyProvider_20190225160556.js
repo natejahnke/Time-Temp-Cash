@@ -11,8 +11,12 @@ export const MyContext = React.createContext();
 export default class MyProvider extends React.Component {
   state = {
     address: "",
+    // city: "",
+    // state: "",
+    // country: "",
     latitude: "",
     longitude: "",
+    // timezone: "",
     home: {
       city: "",
       state: "",
@@ -35,9 +39,7 @@ export default class MyProvider extends React.Component {
   };
 
   getCurrency = country => {
-    console.log(country);
     const currencyCode = countryCurrency[country];
-    console.log(currencyCode);
     axios
       .get(
         "https://api.exchangeratesapi.io/latest?base=USD&symbols=" +
@@ -51,7 +53,6 @@ export default class MyProvider extends React.Component {
 
   splitAddress = address => {
     let split = address.split(", ");
-    console.log(split);
 
     console.log(address.split(",").length - 1);
 
@@ -59,9 +60,6 @@ export default class MyProvider extends React.Component {
       const city = split[0];
       const state = split[1];
       const country = split[2];
-      console.log(city);
-      console.log(state);
-      console.log(country);
 
       this.setState({
         address: address,
@@ -74,9 +72,6 @@ export default class MyProvider extends React.Component {
     } else {
       const city = split[0];
       const country = split[1];
-
-      console.log(city);
-      console.log(country);
 
       this.setState({
         address: address,
@@ -106,9 +101,7 @@ export default class MyProvider extends React.Component {
       .catch(error => console.error("Error", error));
   };
 
-  onClickSetHome = e => {
-    e.preventDefault();
-
+  onClickSetHome = () => {
     if (this.state.latitude & this.state.longitude) {
       console.log(
         "We have lats and longs " +
@@ -128,7 +121,6 @@ export default class MyProvider extends React.Component {
           console.log(weatherResults.data.timezone);
           this.setState({
             home: {
-              ...this.state.home,
               timezone: weatherResults.data.timezone,
               weather: {
                 temperature: weatherResults.data.currently.temperature,
@@ -144,7 +136,7 @@ export default class MyProvider extends React.Component {
             }
           });
         })
-        .then(this.getCurrency(this.state.home.country));
+        .then(this.getCurrency(this.state.country));
     }
   };
 

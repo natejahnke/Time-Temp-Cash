@@ -35,9 +35,7 @@ export default class MyProvider extends React.Component {
   };
 
   getCurrency = country => {
-    console.log(country);
     const currencyCode = countryCurrency[country];
-    console.log(currencyCode);
     axios
       .get(
         "https://api.exchangeratesapi.io/latest?base=USD&symbols=" +
@@ -64,7 +62,6 @@ export default class MyProvider extends React.Component {
       console.log(country);
 
       this.setState({
-        address: address,
         home: {
           city: city,
           state: state,
@@ -79,7 +76,6 @@ export default class MyProvider extends React.Component {
       console.log(country);
 
       this.setState({
-        address: address,
         home: {
           city: city,
           state: null,
@@ -95,7 +91,7 @@ export default class MyProvider extends React.Component {
 
   handleSelect = address => {
     geocodeByAddress(address)
-      .then(this.splitAddress(address))
+      .then(this.setState({ address }))
       .then(results => getLatLng(results[0]))
       .then(({ lat, lng }) =>
         this.setState({
@@ -108,7 +104,7 @@ export default class MyProvider extends React.Component {
 
   onClickSetHome = e => {
     e.preventDefault();
-
+    this.splitAddress(this.state.address);
     if (this.state.latitude & this.state.longitude) {
       console.log(
         "We have lats and longs " +
@@ -126,25 +122,25 @@ export default class MyProvider extends React.Component {
         )
         .then(weatherResults => {
           console.log(weatherResults.data.timezone);
-          this.setState({
-            home: {
-              ...this.state.home,
-              timezone: weatherResults.data.timezone,
-              weather: {
-                temperature: weatherResults.data.currently.temperature,
-                low: weatherResults.data.daily.data[0].temperatureLow,
-                high: weatherResults.data.daily.data[0].temperatureHigh,
-                humidity: weatherResults.data.currently.humidity,
-                precip: weatherResults.data.daily.data[0].precipProbability,
-                wind: weatherResults.data.currently.windSpeed,
-                icon: weatherResults.data.currently.icon,
-                summary: weatherResults.data.currently.summary,
-                fullSummary: weatherResults.data.daily.summary
-              }
-            }
-          });
+          // this.setState({
+          //   home: {
+          //     timezone: weatherResults.data.timezone,
+          //     weather: {
+          //       temperature: weatherResults.data.currently.temperature,
+          //       low: weatherResults.data.daily.data[0].temperatureLow,
+          //       high: weatherResults.data.daily.data[0].temperatureHigh,
+          //       humidity: weatherResults.data.currently.humidity,
+          //       precip: weatherResults.data.daily.data[0].precipProbability,
+          //       wind: weatherResults.data.currently.windSpeed,
+          //       icon: weatherResults.data.currently.icon,
+          //       summary: weatherResults.data.currently.summary,
+          //       fullSummary: weatherResults.data.daily.summary
+          //     }
+          //   }
+          // });
         })
-        .then(this.getCurrency(this.state.home.country));
+        .then(this.getCurrency(this.state.home.country))
+        .catch(error => console.error("Error", error));
     }
   };
 
@@ -167,8 +163,6 @@ export default class MyProvider extends React.Component {
         {this.state.home.timezone && (
           <HomeCard
             homeCity={this.state.home.city}
-            homeState={this.state.home.state}
-            homeCountry={this.state.home.country}
             homeTemperature={this.state.home.weather.temperature}
             homeLow={this.state.home.weather.low}
             homeHigh={this.state.home.weather.high}

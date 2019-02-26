@@ -11,12 +11,7 @@ input {
   width: 100%;
 
   &:focus {
-    color: #434857;
+    color: #fff;
     background-color: #fff;
   }
-}
-
-.autocomplete-dropdown-container {
-  max-width: 236px;
-  z-index: 2;
 }

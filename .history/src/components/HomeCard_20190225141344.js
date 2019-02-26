@@ -5,10 +5,12 @@ import Clock from "react-live-clock";
 
 const HomeCard = props => (
   <div className="card">
-    <h1 className="city">
-      {props.homeCity}, {props.homeState}, {props.homeCountry}
-    </h1>
-    <Clock timezone={"US/Pacific"} format={"h:mm:ssa"} ticking={true} />
+    <h1 className="city">{props.homeCity}</h1>
+    <Clock
+      timezone={"US/Pacific"}
+      format={"h:mm:ssa, dddd, MMMM Mo "}
+      ticking={true}
+    />
     <span className="date">Fri 08 Feb</span>
 
     <div className="weather">

@@ -437,7 +437,8 @@ template {
   margin: 1em auto;
   padding: 0;
   border: solid black 1px;
-  background-color: white; }
+  background-color: white;
+  z-index: 1; }
   .card .city {
     font-size: 20px;
     margin: 0;
@@ -624,3 +625,7 @@ input {
   input:focus {
     color: #434857;
     background-color: #fff; }
+
+.autocomplete-dropdown-container {
+  max-width: 236px;
+  z-index: 2; }

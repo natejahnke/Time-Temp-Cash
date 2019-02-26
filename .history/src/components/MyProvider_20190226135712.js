@@ -167,8 +167,6 @@ export default class MyProvider extends React.Component {
         {this.state.home.timezone && (
           <HomeCard
             homeCity={this.state.home.city}
-            homeState={this.state.home.state}
-            homeCountry={this.state.home.country}
             homeTemperature={this.state.home.weather.temperature}
             homeLow={this.state.home.weather.low}
             homeHigh={this.state.home.weather.high}

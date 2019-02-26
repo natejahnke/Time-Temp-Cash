@@ -11,8 +11,12 @@ export const MyContext = React.createContext();
 export default class MyProvider extends React.Component {
   state = {
     address: "",
+    // city: "",
+    // state: "",
+    // country: "",
     latitude: "",
     longitude: "",
+    // timezone: "",
     home: {
       city: "",
       state: "",
@@ -35,9 +39,7 @@ export default class MyProvider extends React.Component {
   };
 
   getCurrency = country => {
-    console.log(country);
     const currencyCode = countryCurrency[country];
-    console.log(currencyCode);
     axios
       .get(
         "https://api.exchangeratesapi.io/latest?base=USD&symbols=" +
@@ -59,12 +61,8 @@ export default class MyProvider extends React.Component {
       const city = split[0];
       const state = split[1];
       const country = split[2];
-      console.log(city);
-      console.log(state);
-      console.log(country);
 
       this.setState({
-        address: address,
         home: {
           city: city,
           state: state,
@@ -75,11 +73,7 @@ export default class MyProvider extends React.Component {
       const city = split[0];
       const country = split[1];
 
-      console.log(city);
-      console.log(country);
-
       this.setState({
-        address: address,
         home: {
           city: city,
           state: null,
@@ -95,7 +89,8 @@ export default class MyProvider extends React.Component {
 
   handleSelect = address => {
     geocodeByAddress(address)
-      .then(this.splitAddress(address))
+      .then(this.setState({ address }))
+      // .then(this.splitAddress(address))
       .then(results => getLatLng(results[0]))
       .then(({ lat, lng }) =>
         this.setState({
@@ -108,7 +103,6 @@ export default class MyProvider extends React.Component {
 
   onClickSetHome = e => {
     e.preventDefault();
-
     if (this.state.latitude & this.state.longitude) {
       console.log(
         "We have lats and longs " +
@@ -128,7 +122,6 @@ export default class MyProvider extends React.Component {
           console.log(weatherResults.data.timezone);
           this.setState({
             home: {
-              ...this.state.home,
               timezone: weatherResults.data.timezone,
               weather: {
                 temperature: weatherResults.data.currently.temperature,
@@ -144,6 +137,7 @@ export default class MyProvider extends React.Component {
             }
           });
         })
+        .then(this.splitAddress(this.state.address))
         .then(this.getCurrency(this.state.home.country));
     }
   };
@@ -167,8 +161,6 @@ export default class MyProvider extends React.Component {
         {this.state.home.timezone && (
           <HomeCard
             homeCity={this.state.home.city}
-            homeState={this.state.home.state}
-            homeCountry={this.state.home.country}
             homeTemperature={this.state.home.weather.temperature}
             homeLow={this.state.home.weather.low}
             homeHigh={this.state.home.weather.high}

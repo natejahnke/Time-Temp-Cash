@@ -8,7 +8,12 @@ const HomeCard = props => (
     <h1 className="city">
       {props.homeCity}, {props.homeState}, {props.homeCountry}
     </h1>
-    <Clock timezone={"US/Pacific"} format={"h:mm:ssa"} ticking={true} />
+    <Clock
+      timezone={"US/Pacific"}
+      format={"h:mm:ssa dddd, MMMM Mo "}
+      ticking={true}
+      className={"clock"}
+    />
     <span className="date">Fri 08 Feb</span>
 
     <div className="weather">

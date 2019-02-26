@@ -1,0 +1,33 @@
+html {
+  font-size: 62.5%;
+  height: 100%;
+  box-sizing: border-box;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
+}
+
+body {
+  width: 411px;
+  margin: 0 auto;
+  height: 100%;
+  background-color: #252830;
+  font-family: "Roboto Slab", serif;
+  font-size: $m-size;
+}
+
+button {
+  cursor: pointer;
+}
+
+button:disabled {
+  cursor: default;
+}
+
+.input-layout {
+  display: flex;
+  justify-content: center;
+}
