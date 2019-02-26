@@ -1,13 +1,9 @@
-import React from 'react';
-import { MyContext } from './MyProvider';
+import React from "react";
+import { MyContext } from "./MyProvider";
 
 const HomeButton = props => (
   <MyContext.Consumer>
-    {context => (
-      <button onClick={context.onClick}>
-        Set Home
-      </button>
-    )}
+    {context => <button onClick={e => context.onClick(e)}>Set Home</button>}
   </MyContext.Consumer>
 );
 

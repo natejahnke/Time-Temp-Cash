@@ -1,0 +1,17 @@
+input {
+  display: block;
+  background-color: #434857;
+  border: 1px solid #434857;
+  border-radius: 0.25rem;
+  color: #fff;
+  padding: 0.375rem 0.75rem;
+  background-clip: padding-box;
+  //   font-size: 0.9rem;
+  line-height: 1.5;
+  width: 100%;
+
+  &:focus {
+    color: #434857;
+    background-color: #fff;
+  }
+}

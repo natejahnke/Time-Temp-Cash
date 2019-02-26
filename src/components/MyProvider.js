@@ -11,21 +11,23 @@ export const MyContext = React.createContext();
 export default class MyProvider extends React.Component {
   state = {
     address: "",
-    city: "",
-    state: "",
-    country: "",
+    // city: "",
+    // state: "",
+    // country: "",
     latitude: "",
     longitude: "",
-    timezone: "",
+    // timezone: "",
     home: {
-      city: "",
-      state: "",
-      country: "",
+      city: null,
+      state: null,
+      country: null,
       latitude: "",
       longitude: "",
       timezone: "",
       weather: {
         temperature: null,
+        low: "",
+        high: "",
         humidity: "",
         precip: "",
         wind: "",
@@ -61,9 +63,11 @@ export default class MyProvider extends React.Component {
 
       this.setState({
         address: address,
-        city: city,
-        state: state,
-        country: country
+        home: {
+          city: city,
+          state: state,
+          country: country
+        }
       });
     } else {
       const city = split[0];
@@ -71,9 +75,11 @@ export default class MyProvider extends React.Component {
 
       this.setState({
         address: address,
-        city: city,
-        state: null,
-        country: country
+        home: {
+          city: city,
+          state: null,
+          country: country
+        }
       });
     }
   };
@@ -95,7 +101,8 @@ export default class MyProvider extends React.Component {
       .catch(error => console.error("Error", error));
   };
 
-  onClickSetHome = () => {
+  onClickSetHome = e => {
+    e.preventDefault();
     if (this.state.latitude & this.state.longitude) {
       console.log(
         "We have lats and longs " +
@@ -118,6 +125,8 @@ export default class MyProvider extends React.Component {
               timezone: weatherResults.data.timezone,
               weather: {
                 temperature: weatherResults.data.currently.temperature,
+                low: weatherResults.data.daily.data[0].temperatureLow,
+                high: weatherResults.data.daily.data[0].temperatureHigh,
                 humidity: weatherResults.data.currently.humidity,
                 precip: weatherResults.data.daily.data[0].precipProbability,
                 wind: weatherResults.data.currently.windSpeed,
@@ -128,7 +137,7 @@ export default class MyProvider extends React.Component {
             }
           });
         })
-        .then(this.getCurrency(this.state.country));
+        .then(this.getCurrency(this.state.home.country));
     }
   };
 
@@ -141,7 +150,8 @@ export default class MyProvider extends React.Component {
           handleChange: this.handleChange,
           handleSelect: this.handleSelect,
           onClick: this.onClickSetHome
-        }}>
+        }}
+      >
         {this.props.children}
         <div className="input-layout">
           <LocationSearchInput />
@@ -149,8 +159,10 @@ export default class MyProvider extends React.Component {
         </div>
         {this.state.home.timezone && (
           <HomeCard
-            homeCity={this.state.city}
+            homeCity={this.state.home.city}
             homeTemperature={this.state.home.weather.temperature}
+            homeLow={this.state.home.weather.low}
+            homeHigh={this.state.home.weather.high}
             homePrecip={this.state.home.weather.precip}
             homeWind={this.state.home.weather.wind}
             homeHumid={this.state.home.weather.humidity}
