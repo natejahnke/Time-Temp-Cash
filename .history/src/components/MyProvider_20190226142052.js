@@ -49,7 +49,6 @@ export default class MyProvider extends React.Component {
 
         this.setState({
           home: {
-            ...this.state.home,
             toCurrency: results["rates"][currencyCode]
           }
         });

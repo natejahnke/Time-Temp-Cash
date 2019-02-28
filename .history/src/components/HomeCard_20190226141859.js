@@ -39,7 +39,7 @@ const HomeCard = props => (
       </span>
       <span className="weather-icon-desc">{props.homeDesc}</span>
     </div>
-    <div className="money">$1 USD = ¥{props.homeToCurrency} JPY</div>
+    <div className="money">$1 USD = ¥{props.toCurrency} JPY</div>
   </div>
 );
 
