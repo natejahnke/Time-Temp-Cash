@@ -100,35 +100,56 @@ export default class MyProvider extends React.Component {
     this.setState({ address });
   };
 
-  handleSelect = address => {
+  handleSelectHome = address => {
     geocodeByAddress(address)
       .then(this.splitAddress(address))
       .then(results => getLatLng(results[0]))
       .then(({ lat, lng }) =>
         this.setState({
-          latitude: lat,
-          longitude: lng
+          home: {
+            ...this.state.home,
+            latitude: lat,
+            longitude: lng
+          }
         })
       )
       .catch(error => console.error("Error", error));
   };
 
+  homeLocaltoState = () => {
+    this.setState({
+      home: {
+        ...this.state.home,
+        latitude: localStorage.getItem("homeLat"),
+        longitude: localStorage.getItem("homeLong"),
+        city: localStorage.getItem("homeCity"),
+        state: localStorage.getItem("homeState"),
+        country: localStorage.getItem("homeCountry")
+      }
+    });
+  };
+
   onClickSetHome = e => {
     e.preventDefault();
+    localStorage.setItem("homeLat", this.state.home.latitude);
+    localStorage.setItem("homeLong", this.state.home.longitude);
+    localStorage.setItem("homeCity", this.state.home.city);
+    localStorage.setItem("homeState", this.state.home.state);
+    localStorage.setItem("homeCountry", this.state.home.country);
 
-    if (this.state.latitude & this.state.longitude) {
+    if (this.state.home.latitude & this.state.home.longitude) {
       console.log(
         "We have lats and longs " +
-          this.state.latitude +
+          this.state.home.latitude +
           " " +
-          this.state.longitude
+          this.state.home.longitude
       );
       axios
         .get(
           "https://cors-anywhere.herokuapp.com/https://api.darksky.net/forecast/e3c70f1ca1b87636d0e17fa5d97885be/" +
-            this.state.latitude +
+            this.state.home.latitude +
             "," +
-            this.state.longitude +
+            this.state.home.longitude +
             "?exclude=minutely,hourly,alerts,flags"
         )
         .then(weatherResults => {
@@ -155,6 +176,50 @@ export default class MyProvider extends React.Component {
     }
   };
 
+  componentDidMount() {
+    this.homeLocaltoState().then(data => {
+      console.log(data);
+      return "done";
+    });
+    if (localStorage.getItem("homeLat") & localStorage.getItem("homeLong")) {
+      console.log(
+        "We have lats and longs " +
+          this.state.home.latitude +
+          " " +
+          this.state.home.longitude
+      );
+      axios
+        .get(
+          "https://cors-anywhere.herokuapp.com/https://api.darksky.net/forecast/e3c70f1ca1b87636d0e17fa5d97885be/" +
+            this.state.home.latitude +
+            "," +
+            this.state.home.longitude +
+            "?exclude=minutely,hourly,alerts,flags"
+        )
+        .then(weatherResults => {
+          console.log(weatherResults.data.timezone);
+          this.setState({
+            home: {
+              ...this.state.home,
+              timezone: weatherResults.data.timezone,
+              weather: {
+                temperature: weatherResults.data.currently.temperature,
+                low: weatherResults.data.daily.data[0].temperatureLow,
+                high: weatherResults.data.daily.data[0].temperatureHigh,
+                humidity: weatherResults.data.currently.humidity,
+                precip: weatherResults.data.daily.data[0].precipProbability,
+                wind: weatherResults.data.currently.windSpeed,
+                icon: weatherResults.data.currently.icon,
+                summary: weatherResults.data.currently.summary,
+                fullSummary: weatherResults.data.daily.summary
+              }
+            }
+          });
+        })
+        .then(this.getCurrency(this.state.home.country));
+    }
+  }
+
   render() {
     return (
       <MyContext.Provider
@@ -162,7 +227,7 @@ export default class MyProvider extends React.Component {
           state: this.state,
           splitAddress: this.splitAddress,
           handleChange: this.handleChange,
-          handleSelect: this.handleSelect,
+          handleSelect: this.handleSelectHome,
           onClick: this.onClickSetHome
         }}
       >
