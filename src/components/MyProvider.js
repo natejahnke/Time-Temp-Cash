@@ -176,11 +176,7 @@ export default class MyProvider extends React.Component {
     }
   };
 
-  componentDidMount() {
-    this.homeLocaltoState().then(data => {
-      console.log(data);
-      return "done";
-    });
+  getHomeWeather = () => {
     if (localStorage.getItem("homeLat") & localStorage.getItem("homeLong")) {
       console.log(
         "We have lats and longs " +
@@ -216,7 +212,21 @@ export default class MyProvider extends React.Component {
             }
           });
         })
-        .then(this.getCurrency(this.state.home.country));
+      }
+  }
+
+  componentDidMount() {
+    const renderHome = async () => {
+      await this.homeLocaltoState()
+      await this.getHomeWeather()
+      await this.getCurrency(this.state.home.country)
+      throw new Error("oops");
+    }
+    if (localStorage.getItem("homeLat") & localStorage.getItem("homeLong")) {
+      renderHome()
+      .catch(err => {
+        console.log(err);
+      })
     }
   }
 

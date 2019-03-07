@@ -6,10 +6,10 @@ import Clock from "react-live-clock";
 const HomeCard = props => (
   <div className="card">
     <h1 className="city">
-      {props.homeCity}, {props.homeState}, {props.homeCountry}
+      {props.homeCity}, {props.homeState} {props.homeCountry}
     </h1>
     <Clock timezone={"US/Pacific"} format={"h:mm:ssa"} ticking={true} />
-    <span className="date">Fri 08 Feb</span>
+    <span className="date"><Clock timezone={"US/Pacific"} format={"ddd, MMMM Mo, YYYY"} ticking={false} /></span>
 
     <div className="weather">
       <strong className="temperature">
@@ -39,7 +39,7 @@ const HomeCard = props => (
       </span>
       <span className="weather-icon-desc">{props.homeDesc}</span>
     </div>
-    <div className="money">$1 USD = ¥{props.homeToCurrency} JPY</div>
+    <div className="money">$1 USD = ¥{Math.round(props.homeToCurrency)} JPY</div>
   </div>
 );
 
