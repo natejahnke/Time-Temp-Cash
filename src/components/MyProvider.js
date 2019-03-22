@@ -20,6 +20,8 @@ export default class MyProvider extends React.Component {
       latitude: "",
       longitude: "",
       timezone: "",
+      currencyCode: "",
+      toCurrency: "",
       weather: {
         temperature: null,
         low: "",
@@ -50,6 +52,7 @@ export default class MyProvider extends React.Component {
         this.setState({
           home: {
             ...this.state.home,
+            currencyCode: currencyCode,
             toCurrency: results["rates"][currencyCode]
           }
         });
@@ -211,22 +214,21 @@ export default class MyProvider extends React.Component {
               }
             }
           });
-        })
-      }
-  }
+        });
+    }
+  };
 
   componentDidMount() {
     const renderHome = async () => {
-      await this.homeLocaltoState()
-      await this.getHomeWeather()
-      await this.getCurrency(this.state.home.country)
+      await this.homeLocaltoState();
+      await this.getHomeWeather();
+      await this.getCurrency(this.state.home.country);
       throw new Error("oops");
-    }
+    };
     if (localStorage.getItem("homeLat") & localStorage.getItem("homeLong")) {
-      renderHome()
-      .catch(err => {
+      renderHome().catch(err => {
         console.log(err);
-      })
+      });
     }
   }
 
