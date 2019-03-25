@@ -2,7 +2,7 @@ import React from "react";
 import Clock from "react-live-clock";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHome } from "@fortawesome/free-solid-svg-icons";
-import getSymbolFromCurrency from "currency-symbol-map";
+// import getSymbolFromCurrency from "currency-symbol-map";
 import { MyContext } from "./MyProvider";
 
 // const temperature = parseInt(props.homeTemp);
@@ -53,8 +53,7 @@ const HomeCard = props => (
           <span className="weather-icon-desc">{props.homeDesc}</span>
         </div>
         <div className="money">
-          $1 USD = {getSymbolFromCurrency(context.state.home.currencyCode)}
-          {Math.round(props.homeToCurrency)} JPY
+          Currency: {props.currencySymbol} {props.currencyName}
         </div>
       </div>
     )}

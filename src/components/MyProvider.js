@@ -2,6 +2,7 @@ import React from "react";
 import { geocodeByAddress, getLatLng } from "react-places-autocomplete";
 import axios from "axios";
 import countryCurrency from "../countryCurrency.json";
+import currency from "../currency.json";
 
 import HomeCard from "./HomeCard";
 import LocationSearchInput from "./LocationSearchInput";
@@ -14,6 +15,7 @@ export default class MyProvider extends React.Component {
     latitude: "",
     longitude: "",
     home: {
+      mode: "",
       city: "",
       state: "",
       country: "",
@@ -218,11 +220,29 @@ export default class MyProvider extends React.Component {
     }
   };
 
+  getCurrencyName = currencyCode => {
+    return currency[currencyCode]["name"];
+  };
+
+  getCurrencySymbol = currencyCode => {
+    return currency[currencyCode]["symbol"];
+  };
+
+  renderView = () => {
+    this.setState({
+      home: {
+        ...this.state.home,
+        mode: "view"
+      }
+    });
+  };
+
   componentDidMount() {
     const renderHome = async () => {
       await this.homeLocaltoState();
       await this.getHomeWeather();
       await this.getCurrency(this.state.home.country);
+      await this.renderView();
       throw new Error("oops");
     };
     if (localStorage.getItem("homeLat") & localStorage.getItem("homeLong")) {
@@ -233,6 +253,7 @@ export default class MyProvider extends React.Component {
   }
 
   render() {
+    // console.log(currency["JPY"]["name"]);
     return (
       <MyContext.Provider
         value={{
@@ -248,7 +269,7 @@ export default class MyProvider extends React.Component {
           <LocationSearchInput />
           <HomeButton />
         </div>
-        {this.state.home.timezone && (
+        {this.state.home.currencyCode && (
           <HomeCard
             homeCity={this.state.home.city}
             homeState={this.state.home.state}
@@ -260,6 +281,10 @@ export default class MyProvider extends React.Component {
             homeWind={this.state.home.weather.wind}
             homeHumid={this.state.home.weather.humidity}
             homeToCurrency={this.state.home.toCurrency}
+            currencySymbol={this.getCurrencySymbol(
+              this.state.home.currencyCode
+            )}
+            currencyName={this.getCurrencyName(this.state.home.currencyCode)}
           />
         )}
       </MyContext.Provider>
