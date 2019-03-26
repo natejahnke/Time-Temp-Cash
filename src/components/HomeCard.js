@@ -1,11 +1,13 @@
 import React from "react";
 import Clock from "react-live-clock";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faHome } from "@fortawesome/free-solid-svg-icons";
+import {
+  faHome,
+  faLongArrowAltDown,
+  faLongArrowAltUp
+} from "@fortawesome/free-solid-svg-icons";
 // import getSymbolFromCurrency from "currency-symbol-map";
 import { MyContext } from "./MyProvider";
-
-// const temperature = parseInt(props.homeTemp);
 
 const HomeCard = props => (
   <MyContext.Consumer>
@@ -34,9 +36,7 @@ const HomeCard = props => (
             <i className="fas fa-cloud-sun fa-lg" />
           </span>
           <div className="weather-details">
-            <span>
-              Precip: {props.homePrecip.toString().replace(/^[0.]+/, "")}%
-            </span>
+            <span>Precip: {props.homePrecip}%</span>
             <span>Wind: {props.homeWind} MPH</span>
             <span>
               Humidity: {props.homeHumid.toString().replace(/^[0.]+/, "")}%
@@ -45,8 +45,10 @@ const HomeCard = props => (
         </div>
         <div className="hi-low">
           <span>
+            <FontAwesomeIcon icon={faLongArrowAltDown} />
             <i className="fas fa-long-arrow-alt-down" />
             {parseInt(props.homeLow)}˚
+            <FontAwesomeIcon icon={faLongArrowAltUp} />
             <i className="fas fa-long-arrow-alt-up" />
             {parseInt(props.homeHigh)}˚
           </span>

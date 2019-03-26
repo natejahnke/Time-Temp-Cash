@@ -224,8 +224,8 @@ export default class MyProvider extends React.Component {
     return currency[currencyCode]["name"];
   };
 
-  getCurrencySymbol = currencyCode => {
-    return currency[currencyCode]["symbol"];
+  getCurrencySymbol = currencyIcon => {
+    return currency[currencyIcon]["symbol"];
   };
 
   renderView = () => {
@@ -269,7 +269,7 @@ export default class MyProvider extends React.Component {
           <LocationSearchInput />
           <HomeButton />
         </div>
-        {this.state.home.currencyCode && (
+        {this.state.home.currencyCode && this.state.home.weather && (
           <HomeCard
             homeCity={this.state.home.city}
             homeState={this.state.home.state}
@@ -280,7 +280,7 @@ export default class MyProvider extends React.Component {
             homePrecip={this.state.home.weather.precip}
             homeWind={this.state.home.weather.wind}
             homeHumid={this.state.home.weather.humidity}
-            homeToCurrency={this.state.home.toCurrency}
+            // homeToCurrency={this.state.home.toCurrency}
             currencySymbol={this.getCurrencySymbol(
               this.state.home.currencyCode
             )}
