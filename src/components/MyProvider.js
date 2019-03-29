@@ -7,6 +7,7 @@ import currency from "../currency.json";
 import HomeCard from "./HomeCard";
 import LocationSearchInput from "./LocationSearchInput";
 import HomeButton from "./HomeButton";
+import AddCityButton from "./AddCityButton";
 export const MyContext = React.createContext();
 
 export default class MyProvider extends React.Component {
@@ -177,8 +178,15 @@ export default class MyProvider extends React.Component {
             }
           });
         })
-        .then(this.getCurrency(this.state.home.country));
+        .then(this.getCurrency(this.state.home.country))
+        .then(this.clearInput());
     }
+  };
+
+  clearInput = () => {
+    this.setState({
+      address: ""
+    });
   };
 
   getHomeWeather = () => {
@@ -267,7 +275,11 @@ export default class MyProvider extends React.Component {
         {this.props.children}
         <div className="input-layout">
           <LocationSearchInput />
-          <HomeButton />
+          {localStorage.getItem("homeCity") ? (
+            <AddCityButton />
+          ) : (
+            <HomeButton />
+          )}
         </div>
         {this.state.home.currencyCode && this.state.home.weather && (
           <HomeCard
