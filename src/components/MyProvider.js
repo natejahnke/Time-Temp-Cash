@@ -135,6 +135,21 @@ export default class MyProvider extends React.Component {
     });
   };
 
+  deleteHome = e => {
+    e.preventDefault();
+    localStorage.setItem("homeLat", "");
+    localStorage.setItem("homeLong", "");
+    localStorage.setItem("homeCity", "");
+    localStorage.setItem("homeState", "");
+    localStorage.setItem("homeCountry", "");
+
+    this.setState({
+      home: {
+        ...""
+      }
+    });
+  };
+
   onClickSetHome = e => {
     e.preventDefault();
     localStorage.setItem("homeLat", this.state.home.latitude);
@@ -278,11 +293,12 @@ export default class MyProvider extends React.Component {
           {localStorage.getItem("homeCity") ? (
             <AddCityButton />
           ) : (
-            <HomeButton />
+            <HomeButton onClick={this.onClickSetHome} />
           )}
         </div>
         {this.state.home.currencyCode && this.state.home.weather && (
           <HomeCard
+            onClick={this.deleteHome}
             homeCity={this.state.home.city}
             homeState={this.state.home.state}
             homeCountry={this.state.home.country}

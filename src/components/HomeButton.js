@@ -1,10 +1,5 @@
 import React from "react";
-import { MyContext } from "./MyProvider";
 
-const HomeButton = props => (
-  <MyContext.Consumer>
-    {context => <button onClick={e => context.onClick(e)}>Set Home</button>}
-  </MyContext.Consumer>
-);
+const HomeButton = props => <button onClick={props.onClick}>Set Home</button>;
 
 export default HomeButton;

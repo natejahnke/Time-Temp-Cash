@@ -17,6 +17,7 @@ const HomeCard = props => (
           <FontAwesomeIcon icon={faHome} /> {props.homeCity}, {props.homeState}{" "}
           {props.homeCountry}
         </h1>
+        <button onClick={props.onClick}>x</button>
         <Clock timezone={"US/Pacific"} format={"h:mm:ssa"} ticking={true} />
         <span className="date">
           <Clock
