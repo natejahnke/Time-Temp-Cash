@@ -439,15 +439,34 @@ template {
   border: solid black 1px;
   background-color: white;
   z-index: 1; }
-  .card .city {
+  .card .header {
     font-size: 20px;
     margin: 0;
     padding: 4px;
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
+    align-items: center;
     color: #c5c1c0;
     background-color: #0a1612; }
-    .card .city .card {
+    .card .header .city {
+      font-size: 20px;
+      margin: 0;
+      padding: 4px;
+      display: flex;
+      justify-content: center;
+      color: #fff;
+      background-color: rgba(0, 0, 0, 0.03);
+      border-bottom: 1px solid rgba(0, 0, 0, 0.125); }
+    .card .header .delete {
+      color: #1997c6;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      padding-right: 4px;
+      font-size: 24px; }
+      .card .header .delete:hover {
+        color: white; }
+    .card .header .card {
       display: flex;
       flex-direction: column;
       margin: 1em 10px;
@@ -455,16 +474,7 @@ template {
       border: 1px solid rgba(0, 0, 0, 0.125);
       border-radius: 0.25rem;
       background-color: rgba(255, 255, 255, 0.07); }
-      .card .city .card .city {
-        font-size: 20px;
-        margin: 0;
-        padding: 4px;
-        display: flex;
-        justify-content: center;
-        color: #fff;
-        background-color: rgba(0, 0, 0, 0.03);
-        border-bottom: 1px solid rgba(0, 0, 0, 0.125); }
-      .card .city .card .clock {
+      .card .header .card .clock {
         display: flex;
         justify-content: center;
         font-size: 30px;
@@ -472,54 +482,54 @@ template {
         margin-top: 10px;
         color: #cfd2da;
         text-transform: uppercase; }
-      .card .city .card .date {
+      .card .header .card .date {
         display: flex;
         justify-content: center;
         font-size: 18px;
         margin: 0;
         padding-bottom: 10px;
         color: #cfd2da; }
-      .card .city .card .weather {
+      .card .header .card .weather {
         display: flex;
         justify-content: space-between;
         color: #cfd2da;
         margin-bottom: -14px; }
-        .card .city .card .weather .temperature {
+        .card .header .card .weather .temperature {
           display: flex;
           font-size: 30px;
           margin-left: 10px;
           padding: 0; }
-          .card .city .card .weather .temperature .scale {
+          .card .header .card .weather .temperature .scale {
             text-transform: uppercase;
             font-size: 14px;
             display: flex;
             align-self: flex-start;
             padding-top: 3px;
             margin: 0; }
-        .card .city .card .weather .weather-icon {
+        .card .header .card .weather .weather-icon {
           display: flex;
           justify-content: center;
           align-items: center;
           font-size: 1.6rem;
           /* 	margin-bottom: -10px; */ }
-        .card .city .card .weather .weather-icon-desc {
+        .card .header .card .weather .weather-icon-desc {
           font-size: 10px;
           color: #cfd2da;
           display: flex;
           justify-content: center;
           padding-right: 24px;
           margin-top: -10px; }
-          .card .city .card .weather .weather-icon-desc .hi-low {
+          .card .header .card .weather .weather-icon-desc .hi-low {
             margin-left: 10px;
             font-size: 12px;
             margin-top: 10px;
             margin-bottom: 10px; }
-        .card .city .card .weather .weather-details {
+        .card .header .card .weather .weather-details {
           display: flex;
           flex-direction: column;
           margin-right: 10px;
           font-size: 12px; }
-      .card .city .card .money {
+      .card .header .card .money {
         font-family: "Noto Sans KR", Arial, Helvetica, sans-serif;
         display: flex;
         justify-content: center;

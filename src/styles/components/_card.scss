@@ -8,12 +8,37 @@
   background-color: white;
   z-index: 1;
 
-  .city {
+  .header {
     font-size: 20px;
     margin: 0;
     padding: 4px;
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
+    align-items: center;
+    .city {
+      font-size: 20px;
+      margin: 0;
+      padding: 4px;
+      display: flex;
+      justify-content: center;
+      color: #fff;
+      background-color: rgba(0, 0, 0, 0.03);
+      border-bottom: 1px solid rgba(0, 0, 0, 0.125);
+    }
+    .delete {
+      color: #1997c6;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      padding-right: 4px;
+      font-size: 24px;
+
+      &:hover {
+        // background-color: #1997c6;
+        // border-color: #1997c6;
+        color: white;
+      }
+    }
     .card {
       display: flex;
       flex-direction: column;
@@ -22,17 +47,6 @@
       border: 1px solid rgba(0, 0, 0, 0.125);
       border-radius: 0.25rem;
       background-color: rgba(255, 255, 255, 0.07);
-
-      .city {
-        font-size: 20px;
-        margin: 0;
-        padding: 4px;
-        display: flex;
-        justify-content: center;
-        color: #fff;
-        background-color: rgba(0, 0, 0, 0.03);
-        border-bottom: 1px solid rgba(0, 0, 0, 0.125);
-      }
 
       .clock {
         display: flex;
