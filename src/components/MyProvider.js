@@ -36,7 +36,8 @@ export default class MyProvider extends React.Component {
         summary: "",
         fullSummary: ""
       }
-    }
+    },
+    locations: []
   };
 
   getCurrency = country => {
@@ -148,6 +149,47 @@ export default class MyProvider extends React.Component {
         ...""
       }
     });
+  };
+
+  onClickSetLocation = e => {
+    e.preventDefault();
+
+    if (this.state.home.latitude & this.state.home.longitude) {
+      console.log(
+        "We have lats and longs " +
+          this.state.home.latitude +
+          " " +
+          this.state.home.longitude
+      );
+      axios
+        .get(
+          "https://cors-anywhere.herokuapp.com/https://api.darksky.net/forecast/e3c70f1ca1b87636d0e17fa5d97885be/" +
+            this.state.home.latitude +
+            "," +
+            this.state.home.longitude +
+            "?exclude=minutely,hourly,alerts,flags"
+        )
+        .then(weatherResults => {
+          console.log(weatherResults.data.timezone);
+
+          // const location = {
+          //   timezone: weatherResults.data.timezone,
+          //   weather: {
+          //     temperature: weatherResults.data.currently.temperature,
+          //     low: weatherResults.data.daily.data[0].temperatureLow,
+          //     high: weatherResults.data.daily.data[0].temperatureHigh,
+          //     humidity: weatherResults.data.currently.humidity,
+          //     precip: weatherResults.data.daily.data[0].precipProbability,
+          //     wind: weatherResults.data.currently.windSpeed,
+          //     icon: weatherResults.data.currently.icon,
+          //     summary: weatherResults.data.currently.summary,
+          //     fullSummary: weatherResults.data.daily.summary
+          //   }
+          // };
+        })
+        .then(this.getCurrency(this.state.home.country))
+        .then(this.clearInput());
+    }
   };
 
   onClickSetHome = e => {
