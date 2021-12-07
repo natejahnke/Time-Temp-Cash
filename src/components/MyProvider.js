@@ -49,12 +49,12 @@ export default class MyProvider extends React.Component {
     console.log(currencyCode);
     axios
       .get(
-        "https://api.exchangeratesapi.io/latest?access_key=57c44113f121e08f8ca265235c7a0857&base=USD&symbols=" +
+        "http://api.exchangeratesapi.io/latest?access_key=57c44113f121e08f8ca265235c7a0857&symbols=" +
         currencyCode
       )
       .then(currencyResults => {
         let results = currencyResults.data;
-        // console.log(results["rates"][currencyCode]);
+        console.log(results["rates"][currencyCode]);
 
         this.setState({
           home: {
@@ -171,7 +171,7 @@ export default class MyProvider extends React.Component {
       );
       axios
         .get(
-          "https://cors-anywhere.herokuapp.com/https://api.darksky.net/forecast/e3c70f1ca1b87636d0e17fa5d97885be/" +
+          "https://corsanywhere.herokuapp.com/https://api.darksky.net/forecast/e3c70f1ca1b87636d0e17fa5d97885be/" +
           this.state.home.latitude +
           "," +
           this.state.home.longitude +
@@ -217,7 +217,7 @@ export default class MyProvider extends React.Component {
       );
       axios
         .get(
-          "https://cors-anywhere.herokuapp.com/https://api.darksky.net/forecast/e3c70f1ca1b87636d0e17fa5d97885be/" +
+          "https://corsanywhere.herokuapp.com/https://api.darksky.net/forecast/e3c70f1ca1b87636d0e17fa5d97885be/" +
           this.state.home.latitude +
           "," +
           this.state.home.longitude +
@@ -264,7 +264,7 @@ export default class MyProvider extends React.Component {
       );
       axios
         .get(
-          "https://cors-anywhere.herokuapp.com/https://api.darksky.net/forecast/e3c70f1ca1b87636d0e17fa5d97885be/" +
+          "https://corsanywhere.herokuapp.com/https://api.darksky.net/forecast/e3c70f1ca1b87636d0e17fa5d97885be/" +
           this.state.home.latitude +
           "," +
           this.state.home.longitude +
